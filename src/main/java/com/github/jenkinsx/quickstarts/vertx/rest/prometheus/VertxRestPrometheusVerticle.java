@@ -37,7 +37,7 @@ public class VertxRestPrometheusVerticle extends AbstractVerticle {
             helloCounter.inc();
             HttpServerResponse response = routingContext.response();
             response.putHeader("content-type", "application/json");
-            response.end(new JsonObject().put("hello", "world").toBuffer());
+            response.end(new JsonObject().put("Hello", "world!").toBuffer());
         });
     }
 
