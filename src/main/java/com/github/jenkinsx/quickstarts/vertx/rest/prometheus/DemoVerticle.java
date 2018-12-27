@@ -10,7 +10,7 @@ import static io.vertx.core.Vertx.vertx;
 
 public class DemoVerticle extends AbstractVerticle {
 
-    public static final String CONTENT_TYPE = "application/json";
+    public static String CONTENT_TYPE = "application/json";
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
