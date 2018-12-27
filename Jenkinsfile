@@ -17,7 +17,7 @@ pipeline {
         HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       }
       steps {
-        sh 'git fetch --unshallow'
+        sh 'git fetch --unshallow && git branch -m $BRANCH_NAME'
         sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
         // TODO Prow does not report the branch used in the fork, and it is not clear sonar.pullrequest.branch matters anyway
         sh 'mvn -Dsonar.login=$SONARCLOUD_CREDS -Dsonar.pullrequest.branch=$BRANCH_NAME -Dsonar.pullrequest.key=$PULL_NUMBER -Dsonar.pullrequest.base=$PULL_BASE_REF -Dsonar.pullrequest.provider=github -Dsonar.pullrequest.github.repository=$REPO_OWNER/$REPO_NAME install'
@@ -34,6 +34,7 @@ pipeline {
         branch 'master'
       }
       steps {
+        sh 'git fetch --unshallow && git branch -m $BRANCH_NAME'
         git 'https://github.com/cb-kubecd/vertx-demo.git'
 
         // so we can retrieve the version in later steps
