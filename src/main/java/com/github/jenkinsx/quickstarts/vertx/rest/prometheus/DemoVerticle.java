@@ -2,13 +2,11 @@ package com.github.jenkinsx.quickstarts.vertx.rest.prometheus;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 
 import static io.vertx.core.Vertx.vertx;
-import io.vertx.ext.web.RoutingContext;
 
 public class DemoVerticle extends AbstractVerticle {
 
