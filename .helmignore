@@ -23,5 +23,3 @@
 
 # known compile time folders
 target/
-node_modules/
-vendor/
