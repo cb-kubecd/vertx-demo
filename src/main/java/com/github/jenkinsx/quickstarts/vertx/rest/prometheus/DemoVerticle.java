@@ -10,8 +10,6 @@ import static io.vertx.core.Vertx.vertx;
 
 public class DemoVerticle extends AbstractVerticle {
 
-    public static final String CONTENT_TYPE = "application/json";
-
     @Override
     public void start(Future<Void> startFuture) throws Exception {
         Router router = Router.router(vertx);
@@ -26,7 +24,7 @@ public class DemoVerticle extends AbstractVerticle {
     private void exposeHelloWorldEndpoint(Router router) {
         router.route("/hello").handler(routingContext -> {
             HttpServerResponse response = routingContext.response();
-            response.putHeader("content-type", CONTENT_TYPE);
+            response.putHeader("content-type", "application/json");
             response.end(new JsonObject().put("Goodbye", "Cruel World".toLowerCase()).toBuffer());
         });
     }
