@@ -2,13 +2,17 @@ package com.github.jenkinsx.quickstarts.vertx.rest.prometheus;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 
 import static io.vertx.core.Vertx.vertx;
+import io.vertx.ext.web.RoutingContext;
 
 public class DemoVerticle extends AbstractVerticle {
+
+    public static String CONTENT_TYPE = "application/json";
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
@@ -22,10 +26,12 @@ public class DemoVerticle extends AbstractVerticle {
     }
 
     private void exposeHelloWorldEndpoint(Router router) {
-        router.route("/hello").handler(routingContext -> {
-            HttpServerResponse response = routingContext.response();
-            response.putHeader("content-type", "application/json");
-            response.end(new JsonObject().put("Goodbye", "cruel world").toBuffer());
+        router.route("/hello").handler(new Handler<RoutingContext>() {
+            @Override public void handle(RoutingContext routingContext) {
+                HttpServerResponse response = routingContext.response();
+                response.putHeader("content-type", CONTENT_TYPE);
+                response.end(new JsonObject().put("Goodbye", "Cruel World".toLowerCase()).toBuffer());
+            }
         });
     }
 
