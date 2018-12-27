@@ -12,7 +12,7 @@ import io.vertx.ext.web.RoutingContext;
 
 public class DemoVerticle extends AbstractVerticle {
 
-    public static String CONTENT_TYPE = "application/json";
+    public static final String CONTENT_TYPE = "application/json";
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
