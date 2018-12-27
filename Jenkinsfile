@@ -34,6 +34,7 @@ pipeline {
         branch 'master'
       }
       steps {
+        sh 'git fetch --unshallow'
         git 'https://github.com/cb-kubecd/vertx-demo.git'
 
         // so we can retrieve the version in later steps
