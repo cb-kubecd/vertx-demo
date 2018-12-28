@@ -37,7 +37,11 @@ public class DemoVerticle extends AbstractVerticle {
      * Health check URL.
      */
     private void exposeHealthEndpoint(Router router) {
-        router.route("/actuator/health").handler(routingContext -> response(routingContext, "text/plain").end("OK"));
+        router.route("/actuator/health").handler(routingContext -> {
+            HttpServerResponse response = routingContext.response();
+            response.putHeader("content-type", "text/plain");
+            response.end("OK");
+        });
     }
 
     // IDE testing helper
