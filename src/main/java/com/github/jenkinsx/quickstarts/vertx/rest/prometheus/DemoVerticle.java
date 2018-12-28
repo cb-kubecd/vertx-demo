@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 
 import static io.vertx.core.Vertx.vertx;
+import io.vertx.ext.web.RoutingContext;
 
 public class DemoVerticle extends AbstractVerticle {
 
@@ -21,26 +22,32 @@ public class DemoVerticle extends AbstractVerticle {
         super.start(startFuture);
     }
 
+    /**
+     * Main function.
+     */
     private void exposeHelloWorldEndpoint(Router router) {
-        router.route("/hello").handler(routingContext -> {
-            HttpServerResponse response = routingContext.response();
-            response.putHeader("content-type", "application/json");
-            response.end(new JsonObject().put("Goodbye", "Cruel World".toLowerCase()).toBuffer());
-        });
+        router.route("/hello").handler(routingContext -> response(routingContext, "application/json").end(new JsonObject().put("Goodbye", "Cruel World".toLowerCase()).toBuffer()));
     }
 
+    /**
+     * Health check URL.
+     */
     private void exposeHealthEndpoint(Router router) {
-        router.route("/actuator/health").handler(routingContext -> {
-            HttpServerResponse response = routingContext.response();
-            response.putHeader("content-type", "text/plain");
-            response.end("OK");
-        });
+        router.route("/actuator/health").handler(routingContext -> response(routingContext, "text/plain").end("OK"));
     }
 
     // IDE testing helper
 
     public static void main(String[] args) {
         vertx().deployVerticle(new DemoVerticle());
+    }
+
+    // helper methods
+
+    private HttpServerResponse response(RoutingContext routingContext, String contentType) {
+        HttpServerResponse response = routingContext.response();
+        response.putHeader("content-type", contentType);
+        return response;
     }
 
 }
