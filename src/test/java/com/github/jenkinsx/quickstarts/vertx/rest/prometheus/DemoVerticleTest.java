@@ -31,9 +31,10 @@ public class DemoVerticleTest {
         req.end();
     }
 
+    @SuppressWarnings("squid:S2925")
     @Test
     public void slowness() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(300_000);
     }
 
 }
