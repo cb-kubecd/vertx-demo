@@ -7,7 +7,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 
 import static io.vertx.core.Vertx.vertx;
-import io.vertx.ext.web.RoutingContext;
 
 public class DemoVerticle extends AbstractVerticle {
 
@@ -48,14 +47,6 @@ public class DemoVerticle extends AbstractVerticle {
 
     public static void main(String[] args) {
         vertx().deployVerticle(new DemoVerticle());
-    }
-
-    // helper methods
-
-    private HttpServerResponse response(RoutingContext routingContext, String contentType) {
-        HttpServerResponse response = routingContext.response();
-        response.putHeader("content-type", contentType);
-        return response;
     }
 
 }
