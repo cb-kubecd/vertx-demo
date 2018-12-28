@@ -26,7 +26,11 @@ public class DemoVerticle extends AbstractVerticle {
      * Main function.
      */
     private void exposeHelloWorldEndpoint(Router router) {
-        router.route("/hello").handler(routingContext -> response(routingContext, "application/json").end(new JsonObject().put("Goodbye", "Cruel World".toLowerCase()).toBuffer()));
+        router.route("/hello").handler(routingContext -> {
+            HttpServerResponse response = routingContext.response();
+            response.putHeader("content-type", "application/json");
+            response.end(new JsonObject().put("Goodbye", "Cruel World".toLowerCase()).toBuffer());
+        });
     }
 
     /**
