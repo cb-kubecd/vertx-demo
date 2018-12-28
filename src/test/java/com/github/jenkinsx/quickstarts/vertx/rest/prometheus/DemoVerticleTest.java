@@ -31,4 +31,9 @@ public class DemoVerticleTest {
         req.end();
     }
 
+    @Test
+    public void slowness() throws InterruptedException {
+        Thread.sleep(1000);
+    }
+
 }
