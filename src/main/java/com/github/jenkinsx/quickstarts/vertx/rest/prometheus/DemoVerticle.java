@@ -10,8 +10,6 @@ import static io.vertx.core.Vertx.vertx;
 
 public class DemoVerticle extends AbstractVerticle {
 
-    private void unused() {}
-
     @Override
     public void start(Future<Void> startFuture) throws Exception {
         Router router = Router.router(vertx);
