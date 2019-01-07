@@ -5,6 +5,7 @@ pipeline {
     APP_NAME = 'vertx-demo'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     SONARCLOUD_CREDS = credentials('sonarcloud')
+    MAVEN_OPTS = '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
   }
   stages {
     stage('CI Build and push snapshot') {
