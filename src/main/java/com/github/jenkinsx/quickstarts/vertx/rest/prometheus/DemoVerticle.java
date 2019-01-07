@@ -49,4 +49,6 @@ public class DemoVerticle extends AbstractVerticle {
         vertx().deployVerticle(new DemoVerticle());
     }
 
+    private void unused() {}
+
 }
