@@ -10,58 +10,6 @@ import static io.vertx.core.Vertx.vertx;
 
 public class DemoVerticle extends AbstractVerticle {
 
-    private void moreStuff() {
-        int x = 1 + 2;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        x--;
-        x--;
-        x--;
-    }
-
     @Override
     public void start(Future<Void> startFuture) throws Exception {
         Router router = Router.router(vertx);
