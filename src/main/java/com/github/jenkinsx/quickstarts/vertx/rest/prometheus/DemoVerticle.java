@@ -57,6 +57,7 @@ public class DemoVerticle extends AbstractVerticle {
         x++;
         x++;
         x++;
+        x--;
     }
 
     @Override
