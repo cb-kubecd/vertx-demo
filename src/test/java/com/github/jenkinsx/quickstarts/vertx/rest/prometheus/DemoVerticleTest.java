@@ -17,6 +17,7 @@ public class DemoVerticleTest {
         DemoVerticle.main(null);
         HttpClient client = vertx().createHttpClient();
         assert200(client, context, "/hello");
+        assert200(client, context, "/actuator/health");
     }
     
     private void assert200(HttpClient client, TestContext context, String uri) {
