@@ -46,6 +46,7 @@ pipeline {
         sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
         sh "jx step tag --version \$(cat VERSION)"
         sh 'mvn -Dsonar.login=$SONARCLOUD_CREDS -Dsonar.branch.name=master clean deploy'
+        sh 'sed -i -e s/$SONARCLOUD_CREDS/REDACTED/ target/surefire-reports/TEST-*.xml'
         sh 'jx step stash -c tests -p "target/surefire-reports/TEST-*.xml" --basedir target/surefire-reports'
         sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
         sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
