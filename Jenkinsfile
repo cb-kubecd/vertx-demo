@@ -22,6 +22,8 @@ pipeline {
         sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
         // TODO Prow does not report the branch used in the fork, and it is not clear sonar.pullrequest.branch matters anyway
         sh 'mvn -Dsonar.login=$SONARCLOUD_CREDS -Dsonar.pullrequest.branch=$BRANCH_NAME -Dsonar.pullrequest.key=$PULL_NUMBER -Dsonar.pullrequest.base=$PULL_BASE_REF -Dsonar.pullrequest.provider=github -Dsonar.pullrequest.github.repository=$REPO_OWNER/$REPO_NAME install'
+        // TODO despite SUREFIRE-491, there is no way to stop this from making it into test reports:
+        sh 'sed -i -e s/$SONARCLOUD_CREDS/REDACTED/ target/surefire-reports/TEST-*.xml'
         sh 'jx step stash -c tests -p "target/surefire-reports/TEST-*.xml" --basedir target/surefire-reports'
         sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
         sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
