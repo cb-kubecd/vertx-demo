@@ -5,7 +5,7 @@ pipeline {
     APP_NAME = 'vertx-demo'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     SONARCLOUD_CREDS = credentials('sonarcloud')
-    MAVEN_OPTS = '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+    //MAVEN_OPTS = '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
   }
   stages {
     stage('CI Build and push snapshot') {
@@ -19,6 +19,7 @@ pipeline {
       }
       steps {
         sh 'git fetch --unshallow && git branch -m $BRANCH_NAME'
+        sleep time: 1, unit: 'HOURS' // TODO
         sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
         // TODO Prow does not report the branch used in the fork, and it is not clear sonar.pullrequest.branch matters anyway
         sh 'mvn -Dsonar.login=$SONARCLOUD_CREDS -Dsonar.pullrequest.branch=$BRANCH_NAME -Dsonar.pullrequest.key=$PULL_NUMBER -Dsonar.pullrequest.base=$PULL_BASE_REF -Dsonar.pullrequest.provider=github -Dsonar.pullrequest.github.repository=$REPO_OWNER/$REPO_NAME -Dmaven.test.failure.ignore install'
