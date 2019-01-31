@@ -90,11 +90,12 @@
             <id>sonar</id>
             <activation>
                 <property>
-                    <name>sonar.login</name>
-                    <!-- add to .mvn/maven.config and do not commit: -Dsonar.login=… -->
+                    <!-- Should be set as an environment variable. Pending MNG-6303 this may not be in a .mvn/ config file. -->
+                    <name>env.SONARCLOUD_CREDS</name>
                 </property>
             </activation>
             <properties>
+                <sonar.login>${env.SONARCLOUD_CREDS}</sonar.login>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.organization>cb-kubecd</sonar.organization>
                 <sonar.projectKey>cb-kubecd_vertx-demo</sonar.projectKey>
