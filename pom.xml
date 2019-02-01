@@ -18,6 +18,7 @@
         <vertx-maven-plugin.version>1.0.15</vertx-maven-plugin.version>
 
         <vertx.verticle>com.github.jenkinsx.quickstarts.vertx.rest.prometheus.VertxRestPrometheusVerticle</vertx.verticle>
+        <surefire.rerunFailingTestsCount>20</surefire.rerunFailingTestsCount>
     </properties>
 
     <dependencyManagement>

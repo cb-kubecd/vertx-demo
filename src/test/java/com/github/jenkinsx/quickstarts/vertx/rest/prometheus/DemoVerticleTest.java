@@ -31,4 +31,9 @@ public class DemoVerticleTest {
         req.end();
     }
 
+    @Test
+    public void flaky(TestContext context) {
+        assert Math.random() < 0.2 : "oops";
+    }
+
 }
